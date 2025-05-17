@@ -1,0 +1,25 @@
+<div>
+    <form [formGroup]="goalForm" class="flex flex-col gap-4">
+        <input type="text" placeholder="Enter Goal Name..." formControlName="goalName" />
+        <input type="number" placeholder="Enter Target Amount" formControlName="goalAmount" />
+        <input type="date" placeholder="Enter Deadline" formControlName="goalDate" />
+        <input type="number" placeholder="Priority" formControlName="goalPriority" />
+
+        <select formControlName="goalCategory">
+            <option value="" disabled>Select Category</option>
+            <option value="Vacation">Vacation</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Business">Business</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <textarea placeholder="Goal Description" formControlName="goalDescription"></textarea>
+
+        <!-- Button to navigate to the Goal Details page -->
+        <button (click)="viewGoalDetails()" class="inline-block w-full px-6 py-4 mt-4 mb-2 font-bold text-center text-white bg-[#0f172a] uppercase align-middle transition-all rounded-md cursor-pointer active:opacity-80 hover:scale-102 hover:shadow-soft-xs leading-pro text-md ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:border-gray-100 hover:opacity-100 dark:bg-[#0B1437]"
+            type="button">
+            View Goal Details
+        </button>
+    </form>
+</div>

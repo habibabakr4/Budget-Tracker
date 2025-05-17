@@ -1,0 +1,50 @@
+<div class="px-5">
+    <div class="flex flex-row justify-between items-center py-4">
+        <h1 class="text-[25px] text-[#0f172a] dark:text-[#fff] font-semibold flex-1">All Transactions</h1>
+        <div class="flex gap-2 flex-1">
+            <input type="search" placeholder="Please Enter to Search..." class="dark:bg-[#111C44]" [(ngModel)]="searchText" />
+            <select class="dark:bg-[#111C44]" [(ngModel)]="selectedFilter" (change)="loadTransactionsWithFilter(selectedFilter)" name="Filter">
+        <option value="" disabled selected hidden>Filter</option>
+        <option value="newest">Newest</option>
+        <option value="oldest">Oldest</option>
+        <option value="highestPrice">Highest</option>
+        <option value="lowestPrice">Lowest</option>
+      
+    </select>
+            <button class="bg-green-600 h-[40px] rounded-xl" routerLink="/income">Income</button>
+            <button class="bg-[#d14040] h-[40px] rounded-xl" routerLink="/expense">Expense</button>
+        </div>
+    </div>
+
+    <!--Table for all Transactions-->
+
+    <table class="w-full table-auto border-collapse  rounded-xl  shadow-custom">
+        <thead class="bg-[#172b4d]  dark:border-b dark:border-[#e5e5e5]">
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Detail</th>
+                <th>Created By</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody class="bg-[#fff] dark:bg-[#111C44] dark:text-[#fff]" *ngIf="recentTransactions.length > 0">
+            <tr class="border-b border-[#e9ecef]" *ngFor="let transaction of (recentTransactions | searchFilter: searchText)">
+                <td class="dark:text-white">{{ transaction.type === 'Income' ? transaction.incomeTitle : transaction.expenseTitle }}</td>
+                <td [ngStyle]="{'color': transaction.type === 'Income' ? 'green' : 'red'}">{{ transaction.type }}</td>
+                <td class="dark:text-white">{{ transaction.type === 'Income' ? transaction.incomeDate : transaction.expenseDate }}</td>
+                <td>{{ transaction.type === 'Income' ? transaction.incomeDescription : transaction.expenseDescription | truncate:15 }}</td>
+                <td>Mayada</td>
+                <td [ngStyle]="{'color': transaction.type === 'Income' ? 'green' : 'red'}">${{ transaction.type === 'Income' ? transaction.incomeAmount : transaction.expenseAmount }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <mat-paginator [length]="recentTransactions.length" [pageSize]="10" [showFirstLastButtons]="true" [pageSizeOptions]="[10,20,25,30]" [pageIndex]="currentPage" (page)="handlePageEvent($event)">
+
+    </mat-paginator>
+
+
+</div>

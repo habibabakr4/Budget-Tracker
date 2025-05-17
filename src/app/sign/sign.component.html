@@ -1,0 +1,43 @@
+<div class="w-full h-[85vh] max-w-full px-20 p-10 mx-auto mt-0 md:flex-0 shrink-0 flex flex-row gap-12 justify-center items-center text-center dark:text-[#fff]">
+    <div class="relative z-0 flex flex-col min-w-0 break-words bg-white border-0 shadow-xl rounded-2xl bg-clip-border w-4/5 dark:bg-[#111C44]">
+        <!-- Header Box -->
+        <div class="p-8 mb-4 text-center bg-white border-b-0 rounded-t-2xl dark:bg-[#111C44]">
+            <h5 class="text-2xl font-extrabold text-slate-950 dark:text-[#fff]">Sign In To Budget Tracker</h5>
+        </div>
+        <!-- Form Section -->
+        <div class="flex-auto p-8">
+            <form role="form text-left" [formGroup]="signForm">
+                <div class="mb-6">
+                    <input aria-describedby="email-addon" aria-label="Email" formControlName="email" placeholder="Enter Email" class="text-md focus:shadow-soft-primary-outline leading-6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-3 px-4 font-normal text-gray-700 transition-all focus:border-gray-900 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow hover:border-gray-900 dark:bg-[#0B1437] dark:border-none"
+                        type="email">
+                    <!-- Error Message for Email -->
+                    <div *ngIf="signForm.controls['email'].touched && signForm.controls['email'].invalid" class="text-red-500">
+                        <small *ngIf="signForm.controls['email'].hasError('required')">Email is required.</small>
+                        <small *ngIf="signForm.controls['email'].hasError('email')">Invalid email format.</small>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <input aria-describedby="password-addon" formControlName="password" aria-label="Password" placeholder="Enter Password" class="text-md focus:shadow-soft-primary-outline leading-6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-3 px-4 font-normal text-gray-700 transition-all focus:border-gray-900 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow hover:border-gray-900 dark:bg-[#0B1437] dark:border-none"
+                        type="password">
+                    <!-- Error Message for Password -->
+                    <div *ngIf="signForm.controls['password'].touched && signForm.controls['password'].invalid" class="text-red-500">
+                        <small *ngIf="signForm.controls['password'].hasError('required')">Password is required.</small>
+                        <small *ngIf="signForm.controls['password'].hasError('minlength')">Password must be at least 6 characters.</small>
+                    </div>
+                </div>
+
+                <!-- Displaying General Firebase Error -->
+                <div *ngIf="errorMessage" class="text-red-500 mt-4">
+                    {{ errorMessage }}
+                </div>
+
+                <div class="text-center">
+                    <button [disabled]="signForm.invalid" (click)="onSubmit()" class="inline-block w-full px-8 py-4 mt-8 mb-2 font-bold text-center text-white bg-[#0f172a] uppercase align-middle transition-all rounded-md cursor-pointer active:opacity-80 hover:scale-102 hover:shadow-soft-xs leading-pro text-md ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:border-gray-100 hover:opacity-100 dark:bg-[#0B1437]">
+                        Sign In
+                    </button>
+                </div>
+                <p class="mt-6 mb-0 leading-normal text-md">Don't have an account? <a class="font-bold text-slate-700 dark:text-[#fff]" routerLink="/sign Up">Sign up</a></p>
+            </form>
+        </div>
+    </div>
+</div>
